@@ -10,12 +10,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
     padding: 20px;
 }
 
 .login-section {
     background-color: #f8f9fa;
-    border-right: 1px solid #e0e0e0;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .login-form {
@@ -28,7 +31,7 @@
 .login-form h2 {
     margin-bottom: 20px;
     font-size: 24px;
-    color: #333;
+    color: #177ad6;
 }
 
 .login-form input {
@@ -37,6 +40,8 @@
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: rgb(227, 227, 220);
+    color: rgb(0, 0, 0);
 }
 
 .login-form button {
@@ -47,6 +52,13 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.link {
+    margin-top: 15px;
+    color: #0d62ff;
+    cursor: pointer;
+    text-decoration:underline;
 }
 
 @media (max-width: 768px) {
