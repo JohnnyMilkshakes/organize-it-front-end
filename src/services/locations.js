@@ -9,6 +9,15 @@ export const getLocations = async () => {
   }
 };
 
+export const getLocation = async (id) => {
+    try {
+      const response = await api.get(`/locations/${id}`);
+      return response.data;
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
 export const addLocation = async (locationData) => {
   try {
     const response = await api.post(`/locations/`, locationData);
