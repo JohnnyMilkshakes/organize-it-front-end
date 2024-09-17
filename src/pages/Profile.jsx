@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {getLocations, addLocation}  from '../services/locations';
 
 const Profile = () => {
@@ -41,7 +42,9 @@ const Profile = () => {
                 {locations.length > 0 ? (
                     locations.map((location) => (
                         <li key={location.id}>
+                            <Link to={`/locations/${location.id}`}>
                             {location.name} - {location.address}
+                            </Link>
                         </li>
                     ))
                 ) : (
