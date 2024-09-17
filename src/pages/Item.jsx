@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getItems, editItem } from '../services/items';  // Import getItems and editItem
 
-const ItemsPage = () => {
+const Item = () => {
     const [items, setItems] = useState([]);  // State for the list of items
     const [selectedItem, setSelectedItem] = useState(null);  // State for the selected item
     const [showEditForm, setShowEditForm] = useState(false);  // State to show/hide the edit form
@@ -143,4 +143,4 @@ const ItemsPage = () => {
     );
 };
 
-export default ItemsPage;
+export default Item;
