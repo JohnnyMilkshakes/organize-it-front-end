@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getItems, editItem } from '../services/items';  // Import getItems and editItem
+import { getItems, editItem } from '../../services/items';  // Import getItems and editItem
 
 const Item = () => {
     const [items, setItems] = useState([]);  // State for the list of items

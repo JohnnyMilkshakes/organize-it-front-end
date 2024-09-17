@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getLocation } from "../services/locations"; // Service to get locations
-import { getItems, addItem } from "../services/items"; // Service to get items for a location
+import { getLocation } from "../../services/locations"; // Service to get locations
+import { getItems, addItem } from "../../services/items"; // Service to get items for a location
 import { useParams } from "react-router-dom";
 
 const Location = () => {
