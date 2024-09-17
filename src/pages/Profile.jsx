@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import getLocations from '../services/locations';
-import addLocation from '../services/addLocation'; // Assuming you have a service to add a new location
+import {getLocations, addLocation}  from '../services/locations';
 
 const Profile = () => {
     const [locations, setLocations] = useState([]);
