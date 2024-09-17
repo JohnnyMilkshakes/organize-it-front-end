@@ -20,7 +20,7 @@ export const getItem = async (locationId, itemId) => {
 
 export const addItem = async (locationId, itemData) => {
   try {
-    const response = await api.post(`/locations/${locationId}/items`, itemData);
+    const response = await api.post(`/locations/${locationId}/items/`, itemData);
     return response.data;
   } catch (error) {
     console.log(error);

@@ -20,7 +20,7 @@ if (window.location.hostname === "localhost") {
   apiUrl = apiUrls.production;
 }
 const api = axios.create({
-  baseURL: apiUrl
+  baseURL: apiUrl,
 });
 
 api.interceptors.request.use(
