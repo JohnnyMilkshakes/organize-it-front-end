@@ -1,5 +1,14 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SignUpLogIn from './components/SignUpLogIn.jsx';
+
 const App = () => {
-  return <h1>Hello world!</h1>;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<SignUpLogIn />} />
+      </Routes>
+    </Router>
+  );
 };
 
 export default App;
