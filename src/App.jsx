@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignUpLogIn from './components/SignUpLogIn.jsx';
-import Profile from './pages/Profile.jsx'
-import Location from './pages/Location.jsx';
+import Profile from './pages/ProfileDisplay/Profile.jsx'
+import Location from './pages/LocationDisplay/Location.jsx';
 
 const App = () => {
   return (
