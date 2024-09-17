@@ -49,6 +49,12 @@ const Home = () => {
                     </p>
                 </form>
             </div>
+            <div className='welcome-section'>
+                <h1>Welcome!</h1>
+                <p>
+                    wjhefhsudfhaisfhisd.
+                </p>
+            </div>
         </div>
     )
 }
