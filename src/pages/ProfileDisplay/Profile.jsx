@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getLocations, addLocation } from "../../services/locations";
+import './Profile.css'
 
 const Profile = () => {
   const [locations, setLocations] = useState([]);
@@ -35,7 +36,7 @@ const Profile = () => {
   };
 
   return (
-    <div>
+    <div className="profile-container">
       <h1>Your Profile</h1>
       <h2>Created Locations</h2>
       <ul>
