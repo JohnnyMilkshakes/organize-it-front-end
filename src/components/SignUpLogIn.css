@@ -20,7 +20,9 @@
 .welcome-section {
     flex: 1;
     height: 100%;
-    background-color: #007bff;
+    background-image: url(../assets/LandingPage.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     color: white;
     display: flex;
     flex-direction: column;
@@ -31,12 +33,12 @@
 }
 
 .welcome-section h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
+    font-size: 48px;
+    margin-bottom: 16px;
 }
 
 .welcome-section p {
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.5;
 }
 
@@ -50,7 +52,7 @@
 .login-form h2 {
     margin-bottom: 20px;
     font-size: 24px;
-    color: #177ad6;
+    color: #c13b05;
 }
 
 .login-form input {
@@ -66,7 +68,7 @@
 .login-form button {
     width: 150px;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #c13b05;
     color: white;
     border: none;
     border-radius: 5px;
@@ -75,7 +77,7 @@
 
 .link {
     margin-top: 15px;
-    color: #0d62ff;
+    color: #ff6e0d;
     cursor: pointer;
     text-decoration: underline;
 }
