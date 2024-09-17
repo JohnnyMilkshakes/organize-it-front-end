@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import './Profile.css'
 import { getLocations } from "../../services/locations";
 import LocationForm from "../../components/LocationForm/LocationForm";
 
@@ -18,7 +19,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <div>
+    <div className="profile-container">
       <h1>Your Profile</h1>
       <h2>Created Locations</h2>
       <ul>
