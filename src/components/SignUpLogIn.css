@@ -1,0 +1,103 @@
+
+
+.home-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw; 
+}
+
+.login-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: #f8f9fa;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-section {
+    flex: 1;
+    height: 100%;
+    background-image: url(../assets/LandingPage.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+}
+
+.welcome-section h1 {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.welcome-section p {
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #c13b05;
+}
+
+.login-form input {
+    width: 500px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgb(227, 227, 220);
+    color: rgb(0, 0, 0);
+}
+
+.login-form button {
+    width: 150px;
+    padding: 10px;
+    background-color: #c13b05;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: #d14407;
+    transform: scale(1.05);
+}
+
+
+.link {
+    margin-top: 15px;
+    color: #ff6e0d;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .home-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .login-section, .welcome-section {
+        flex: none;
+        width: 100%;
+        height: auto;
+    }
+}
