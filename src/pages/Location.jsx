@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import getLocations from '../services/locations';  // Service to get locations
 import getItems from '../services/items';  // Service to get items for a location
 
-const LocationPage = () => {
+const LocationPage = ({ token }) => {
     const [locations, setLocations] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState(null);  // Track selected location
     const [items, setItems] = useState([]);  // Track items for selected location
@@ -13,7 +13,7 @@ const LocationPage = () => {
     useEffect(() => {
         const fetchLocations = async () => {
             try {
-                const data = await getLocations();
+                const data = await getLocations();  // This will include the user's token in the request
                 setLocations(data);
             } catch (err) {
                 setError('Failed to load locations');
@@ -27,7 +27,7 @@ const LocationPage = () => {
         setSelectedLocation(locationId);
         setLoading(true);
         try {
-            const itemsData = await getItems(locationId);
+            const itemsData = await getItems(locationId);  // Fetch items for the selected location
             setItems(itemsData);
             setLoading(false);
         } catch (err) {
@@ -38,7 +38,7 @@ const LocationPage = () => {
 
     return (
         <div>
-            <h1>Locations</h1>
+            <h1>Your Locations</h1>
             {error && <div style={{ color: 'red' }}>{error}</div>}
 
             <div className="location-list">
@@ -82,3 +82,4 @@ const LocationPage = () => {
 };
 
 export default LocationPage;
+
