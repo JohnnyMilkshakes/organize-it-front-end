@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getLocation } from "../../services/locations"; // Service to get locations
 import { getItems, addItem } from "../../services/items"; // Service to get items for a location
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Location = () => {
   const [location, setLocation] = useState(null);
@@ -81,12 +82,14 @@ const Location = () => {
           <h2>Items</h2>
           <ul>
             {items.map((item) => (
-              <li key={item.id}>
+              <Link to={`/locations/${locationId}/items/${item.id}`} key={item.id}>
+              <li >
                 <h3>{item.name}</h3>
                 <p>{item.description}</p>
                 <p>Quantity: {item.quantity}</p>
                 <p>Storage Area: {item.storage_area}</p>
               </li>
+              </Link>
             ))}
           </ul>
         </div>
