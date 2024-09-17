@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { getItems, editItem } from '../../services/items';  // Import getItems and editItem
+import { useState, useEffect } from 'react';
+import { getItem } from '../../services/items';  // Import getItems and editItem
+import { useParams } from 'react-router-dom';
 
 const Item = () => {
-    const [items, setItems] = useState([]);  // State for the list of items
-    const [selectedItem, setSelectedItem] = useState(null);  // State for the selected item
+    const {locationId, itemId} = useParams()
+    const [item, setItem] = useState(null);  // State for the selected item
     const [showEditForm, setShowEditForm] = useState(false);  // State to show/hide the edit form
     const [editedItem, setEditedItem] = useState({
         name: '',
@@ -12,22 +13,14 @@ const Item = () => {
         storage_area: '',
     });  // State to track the form inputs for editing
 
-    // Fetch items when the component mounts
     useEffect(() => {
-        const loadItems = async () => {
-            const fetchedItems = await getItems();  // Fetch items
-            setItems(fetchedItems);
-        };
+        const fetchItem = async () => {
+            const item = await getItem(locationId, itemId)
+            setItem(item)
+        }
+        fetchItem()
 
-        loadItems();
-    }, []);
-
-    // Handle clicking on an item to show its details
-    const handleItemClick = (item) => {
-        setSelectedItem(item);
-        setEditedItem(item);  // Populate the form with the selected item details
-        setShowEditForm(false);  // Hide the edit form until the edit button is clicked
-    };
+    }, [locationId, itemId])
 
     // Handle form input changes for editing an item
     const handleInputChange = (e) => {
@@ -42,12 +35,12 @@ const Item = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            await editItem(selectedItem.id, editedItem);  // Edit the item
+            // await editItem(item.id, editedItem);  // Edit the item
             // Update the items list with the edited item
-            setItems((prevItems) => prevItems.map((item) =>
-                item.id === selectedItem.id ? editedItem : item
-            ));
-            setSelectedItem(editedItem);  // Update the selected item with the new details
+            // setItems((prevItems) => prevItems.map((item) =>
+            //     item.id === item.id ? editedItem : item
+            // ));
+            // setSelectedItem(editedItem);  // Update the selected item with the new details
             setShowEditForm(false);  // Hide the form after submission
         } catch (error) {
             console.error('Failed to update item:', error);
@@ -56,31 +49,16 @@ const Item = () => {
 
     return (
         <div>
-            <h1>Your Items</h1>
-            <ul>
-                {items.length > 0 ? (
-                    items.map((item) => (
-                        <li
-                            key={item.id}
-                            onClick={() => handleItemClick(item)}  // Clicking on an item shows its details
-                            style={{ cursor: 'pointer', padding: '10px', border: '1px solid #ddd', marginBottom: '10px' }}
-                        >
-                            {item.name}
-                        </li>
-                    ))
-                ) : (
-                    <li>No items found.</li>
-                )}
-            </ul>
 
             {/* Show the selected item details */}
-            {selectedItem && (
+            {item ? (
+                
                 <div>
+                    <h1>Displaying Item: {item.name}</h1>
                     <h2>Item Details</h2>
-                    <p>Name: {selectedItem.name}</p>
-                    <p>Description: {selectedItem.description}</p>
-                    <p>Quantity: {selectedItem.quantity}</p>
-                    <p>Storage Area: {selectedItem.storage_area}</p>
+                    <p>Description: {item.description}</p>
+                    <p>Quantity: {item.quantity}</p>
+                    <p>Storage Area: {item.storage_area}</p>
 
                     {/* Button to toggle the edit form */}
                     <button onClick={() => setShowEditForm(!showEditForm)}>
@@ -138,7 +116,7 @@ const Item = () => {
                         </form>
                     )}
                 </div>
-            )}
+            ): <div>Loading</div>}
         </div>
     );
 };
