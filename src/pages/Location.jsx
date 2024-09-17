@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import getLocations from '../services/locations';  // Service to get locations
-import getItems from '../services/items';  // Service to get items for a location
-import addItem from '../services/addItem';  // Service to add an item to a location
+import {getLocations} from '../services/locations';  // Service to get locations
+import {getItems, addItem} from '../services/items';  // Service to get items for a location
 
-const LocationPage = () => {
+
+const Location = () => {
     const [locations, setLocations] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState(null);  // Track selected location
     const [items, setItems] = useState([]);  // Track items for selected location
@@ -167,4 +167,4 @@ const LocationPage = () => {
     );
 };
 
-export default LocationPage;
+export default Location;
