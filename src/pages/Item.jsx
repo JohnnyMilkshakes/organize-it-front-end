@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getItems, updateItem } from '../services/items';  // Assume getItems fetches items and updateItem updates the item
+import { getItems, editItem } from '../services/items';  // Import getItems and editItem
 
 const ItemsPage = () => {
     const [items, setItems] = useState([]);  // State for the list of items
@@ -38,11 +38,11 @@ const ItemsPage = () => {
         }));
     };
 
-    // Handle form submission to update the item
+    // Handle form submission to edit the item
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            await updateItem(selectedItem.id, editedItem);  // Update the item
+            await editItem(selectedItem.id, editedItem);  // Edit the item
             // Update the items list with the edited item
             setItems((prevItems) => prevItems.map((item) =>
                 item.id === selectedItem.id ? editedItem : item
