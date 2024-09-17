@@ -6,12 +6,18 @@
  
   html, body {
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
+    background-image: url(/src/assets/LandingPage.png);
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   
   .profile-container {
-    min-height: 100vh;
+    height: 600px;
+    width: 1000px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -42,7 +48,7 @@
   }
   
   li {
-    background-color: #e9ecef;
+    background-color: #f8decc;
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 5px;
@@ -50,42 +56,29 @@
   }
   
   li:hover {
-    background-color: #c8d6e5;
+    background-color: #e9a68c;
   }
   
   li a {
     text-decoration: none;
-    color: #007bff;
+    color: #d14407;
     font-weight: bold;
   }
   
   li a:hover {
     text-decoration: underline;
+    color: #000000;
   }
-  
-  button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-    display: block;
-    margin: 20px auto;
+
+  .profile-container button {
+    background-color: #c13b05;
+    transition: background-color 0.3s ease, transform 0.3s ease;
   }
   
   button:hover {
-    background-color: #0056b3;
-  }
-  
-  form {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    background-color: #d14407;
+    transform: scale(1.05);
+    cursor: pointer;
   }
   
   label {
@@ -93,22 +86,6 @@
     font-size: 1rem;
     color: #333;
     margin-bottom: 5px;
-  }
-  
-  form button {
-    width: 100%;
-    background-color: #28a745;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 1rem;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  form button:hover {
-    background-color: #218838;
   }
   
   @media (max-width: 600px) {
