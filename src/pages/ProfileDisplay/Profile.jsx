@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import './Profile.css'
+import "./Profile.css";
 import { getLocations } from "../../services/locations";
 import LocationForm from "../../components/LocationForm/LocationForm";
 
 const Profile = () => {
   const [locations, setLocations] = useState([]);
   const [showForm, setShowForm] = useState(false); // State to show/hide the form
-
 
   useEffect(() => {
     const loadLocations = async () => {
@@ -25,11 +24,11 @@ const Profile = () => {
       <ul>
         {locations.length > 0 ? (
           locations.map((location) => (
-            <li key={location.id}>
-              <Link to={`/locations/${location.id}`}>
+            <Link key={location.id} to={`/locations/${location.id}`}>
+              <li>
                 {location.name} - {location.address}
-              </Link>
-            </li>
+              </li>
+            </Link>
           ))
         ) : (
           <li>No locations found.</li>
@@ -42,7 +41,9 @@ const Profile = () => {
       </button>
 
       {/* Conditionally render the form */}
-      {showForm && <LocationForm setLocations={setLocations} setShowForm={setShowForm}/>}
+      {showForm && (
+        <LocationForm setLocations={setLocations} setShowForm={setShowForm} />
+      )}
     </div>
   );
 };
