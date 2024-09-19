@@ -16,7 +16,7 @@ function ItemEdit({
     storage_area: "",
   };
   const [itemToUpdate, setItemToUpdate] = useState(emptyForm); // State to track form input
-  const navigate = useNavigate(); // Initialize navigation
+  const navigate = useNavigate(''); // Initialize navigation
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -52,12 +52,12 @@ function ItemEdit({
     await deleteItem(locationId, itemId);
 
     // Remove the deleted item from the items list (if applicable)
-    setItem((prevItems) =>
-      prevItems.filter((item) => item.id !== itemId)
-    );
+    // setItem((prevItems) =>
+    //   prevItems.filter((item) => item.id !== itemId)
+    // );
 
     // Navigate back to the item list page or another page after deletion
-    navigate (`/locations/${locationId}`);// Adjust this route to match your item list display route
+    navigate(`/locations/${locationId}`);
   };
 
   return (
@@ -116,7 +116,7 @@ function ItemEdit({
       >
         Cancel
       </button>
-      <button onClick={handleDelete}>Delete</button>
+      <button onClick={() => {handleDelete}}>Delete</button>
     </li>
   );
 }

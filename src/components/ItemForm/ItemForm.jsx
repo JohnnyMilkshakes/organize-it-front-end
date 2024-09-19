@@ -30,13 +30,12 @@ function ItemForm({ locationId, setItems, setShowForm }) {
     } catch (err) {
       console.log("Failed to add item", err);
     }
-
   };
   return (
     <>
     <div className="modal-overlay">
     <div className="modal-content">
-      <button className="close-button" onClick={() => setShowForm (false)}>X</button>
+      <button className="close-button" onClick={() => setShowForm(false)}>X</button>
       <form className="item-form" onSubmit={handleFormSubmit}>
         <h3>Add New Item</h3>
         <div>
