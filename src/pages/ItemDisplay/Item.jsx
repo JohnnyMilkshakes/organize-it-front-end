@@ -27,10 +27,6 @@ const Item = () => {
           <p>Quantity: {item.quantity}</p>
           <p>Storage Area: {item.storage_area}</p>
 
-          <button onClick={() => setShowEditForm(!showEditForm)}>
-            {showEditForm ? "Cancel" : "Edit Item"}
-          </button>
-
           {showEditForm && (
             <ItemEdit
               locationId={locationId}
@@ -40,6 +36,9 @@ const Item = () => {
               setShowEditForm={setShowEditForm}
             />
           )}
+          <button onClick={() => setShowEditForm(!showEditForm)}>
+            {showEditForm ? "Cancel" : "Edit Item"}
+          </button>
         </div>
       ) : (
         <div>Loading</div>

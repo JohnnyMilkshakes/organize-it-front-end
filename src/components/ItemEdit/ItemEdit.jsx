@@ -104,13 +104,6 @@ function ItemEdit({
         </div>
         <button type="submit">Submit</button>
       </form>
-      <button
-        onClick={() => {
-          setShowEditForm(!showEditForm);
-        }}
-      >
-        Cancel
-      </button>
       <button onClick={handleDelete}>Delete</button>
     </li>
   );
