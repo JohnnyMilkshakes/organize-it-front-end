@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getItem } from "../../services/items"; // Import getItems and editItem
 import { useParams } from "react-router-dom";
 import ItemEdit from "../../components/ItemEdit/ItemEdit";
+import "./Item.css";
 
 const Item = () => {
   const { locationId, itemId } = useParams();
@@ -18,21 +19,18 @@ const Item = () => {
 
   return (
     <div>
-      {/* Show the selected item details */}
       {item ? (
-        <div>
+        <div className="item-container">
           <h1>Displaying Item: {item.name}</h1>
           <h2>Item Details</h2>
           <p>Description: {item.description}</p>
           <p>Quantity: {item.quantity}</p>
           <p>Storage Area: {item.storage_area}</p>
 
-          {/* Button to toggle the edit form */}
           <button onClick={() => setShowEditForm(!showEditForm)}>
             {showEditForm ? "Cancel" : "Edit Item"}
           </button>
 
-          {/* Conditionally render the form to edit the item */}
           {showEditForm && (
             <ItemEdit
               locationId={locationId}
