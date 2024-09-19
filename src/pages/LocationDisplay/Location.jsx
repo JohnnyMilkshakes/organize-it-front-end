@@ -4,6 +4,7 @@ import { getLocation } from "../../services/locations";
 import { useParams } from "react-router-dom";
 import ItemForm from "../../components/ItemForm/ItemForm";
 import ItemTile from "../../components/ItemTile/ItemTile";
+import './Location.css'
 
 const Location = () => {
   const { locationId } = useParams();
@@ -36,8 +37,9 @@ const Location = () => {
   }, [locationId]);
 
   return (
-    <div>
+    <div className="location-container">
       {site ? (
+
         <>
           <h1>Location: {site.name}</h1>
           <p>{site.address}</p>
@@ -60,9 +62,11 @@ const Location = () => {
               </>
             )}
 
+          <div className="button-wrapper">
             <button onClick={() => setShowForm(!showForm)}>
               {showForm ? "Cancel" : "Add New Item"}
             </button>
+          </div>
 
           </div>
 
