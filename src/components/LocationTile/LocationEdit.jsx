@@ -76,16 +76,17 @@ function LocationEdit({ locationId, setLocations, showEdit, setShowEdit }) {
             required
           />
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" className="location-submit">Submit</button>
       </form>
       <button
         onClick={() => {
           setShowEdit(!showEdit);
         }}
+        className="location-cancel"
       >
         Cancel
       </button>
-      <button onClick={handleDelete}>Delete</button>
+      <button className="location-delete" onClick={handleDelete} >Delete</button>
     </li>
   );
 }
