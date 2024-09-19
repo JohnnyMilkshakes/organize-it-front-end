@@ -35,3 +35,12 @@ export const updateItem = async (locationId, itemId ,itemData) => {
       console.log(error);
     }
   };
+
+  export const deleteItem = async (locationId, itemId) => {
+    try {
+      const response = await api.delete(`/locations/${locationId}/items/${itemId}/`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }; 

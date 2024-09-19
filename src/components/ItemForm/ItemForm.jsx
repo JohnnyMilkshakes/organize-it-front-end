@@ -1,4 +1,4 @@
-import { addItem, getItems } from "../../services/items";
+import { addItem, getItems, deleteItem } from "../../services/items";
 import { useState } from "react";
 
 function ItemForm({ locationId, setItems, setShowForm }) {
@@ -30,6 +30,7 @@ function ItemForm({ locationId, setItems, setShowForm }) {
     } catch (err) {
       console.log("Failed to add item", err);
     }
+
   };
   return (
     <>
