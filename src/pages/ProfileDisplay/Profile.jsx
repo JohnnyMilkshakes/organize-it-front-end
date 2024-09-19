@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Profile.css";
 import { getLocations } from "../../services/locations";
 import LocationForm from "../../components/LocationForm/LocationForm";
+import LocationTile from "../../components/LocationTile/LocationTile";
 
 const Profile = () => {
   const [locations, setLocations] = useState([]);
@@ -24,11 +25,7 @@ const Profile = () => {
       <ul>
         {locations.length > 0 ? (
           locations.map((location) => (
-            <Link key={location.id} to={`/locations/${location.id}`}>
-              <li>
-                {location.name} - {location.address}
-              </li>
-            </Link>
+            <LocationTile key={location.id} setLocations={setLocations} location={location}/>
           ))
         ) : (
           <li>No locations found.</li>
