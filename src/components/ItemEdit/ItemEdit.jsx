@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { getItem, updateItem } from "../../services/items.js";
+import { getItem, updateItem, deleteItem } from "../../services/items.js";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 function ItemEdit({
   locationId,
@@ -15,12 +16,14 @@ function ItemEdit({
     storage_area: "",
   };
   const [itemToUpdate, setItemToUpdate] = useState(emptyForm); // State to track form input
+  const navigate = useNavigate(); // Initialize navigation
 
   useEffect(() => {
-    const fetchLocation = async () => {
-      setItemToUpdate(await getItem(locationId, itemId));
+    const fetchItem = async () => {
+      const item = await getItem(locationId, itemId);
+      setItemToUpdate(item);
     };
-    fetchLocation();
+    fetchItem();
   }, [locationId, itemId]);
 
   // Handle form input changes
@@ -37,12 +40,26 @@ function ItemEdit({
     e.preventDefault();
     const updatedItem = await updateItem(locationId, itemId, itemToUpdate);
 
-    // Update the item
+    // Update the item in the parent state
     setItem(updatedItem);
 
     setShowEditForm(false); // Hide the form after submission
     setItemToUpdate(emptyForm); // Reset the form inputs
   };
+
+  // Handle item deletion
+  const handleDelete = async () => {
+    await deleteItem(locationId, itemId);
+
+    // Remove the deleted item from the items list (if applicable)
+    setItem((prevItems) =>
+      prevItems.filter((item) => item.id !== itemId)
+    );
+
+    // Navigate back to the item list page or another page after deletion
+    navigate (`/locations/${locationId}`);// Adjust this route to match your item list display route
+  };
+
   return (
     <li>
       <form onSubmit={handleSubmit}>
@@ -99,9 +116,10 @@ function ItemEdit({
       >
         Cancel
       </button>
-      <button>Delete</button>
+      <button onClick={handleDelete}>Delete</button>
     </li>
   );
 }
 
 export default ItemEdit;
+
