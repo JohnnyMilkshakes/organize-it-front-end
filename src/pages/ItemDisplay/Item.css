@@ -42,4 +42,33 @@ h2 {
     justify-content: center;
     align-items: center;
 }
+
+.edit-item label {
+    color: #d14407;
+  }
+
+  .edit-item div {
+    margin-bottom: 10px;
+  }
   
+  .edit-item input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .edit-item button {
+    background-color: #c13b05;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-item button:hover {
+    background-color: #d14407;
+  }

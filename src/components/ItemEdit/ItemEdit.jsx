@@ -16,7 +16,7 @@ function ItemEdit({
     storage_area: "",
   };
   const [itemToUpdate, setItemToUpdate] = useState(emptyForm); // State to track form input
-  const navigate = useNavigate(''); // Initialize navigation
+  const navigate = useNavigate(""); // Initialize navigation
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -56,58 +56,63 @@ function ItemEdit({
   };
 
   return (
-    <li>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={itemToUpdate.name}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="description">Description:</label>
-          <input
-            type="text"
-            id="description"
-            name="description"
-            value={itemToUpdate.description}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="quantity">Quantity:</label>
-          <input
-            type="number"
-            id="quantity"
-            name="quantity"
-            value={itemToUpdate.quantity}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="storage_area">Storage Area:</label>
-          <input
-            type="text"
-            id="storage_area"
-            name="storage_area"
-            value={itemToUpdate.storage_area}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-      <button onClick={handleDelete}>Delete</button>
-    </li>
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <button className="close-button" onClick={() => setShowEditForm(false)}>
+          X
+        </button>
+        <h3>Edit Item</h3>
+          <form className="edit-item" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="name">Name:</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={itemToUpdate.name}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="description">Description:</label>
+              <input
+                type="text"
+                id="description"
+                name="description"
+                value={itemToUpdate.description}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="quantity">Quantity:</label>
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                value={itemToUpdate.quantity}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="storage_area">Storage Area:</label>
+              <input
+                type="text"
+                id="storage_area"
+                name="storage_area"
+                value={itemToUpdate.storage_area}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <button type="submit">Submit</button>
+          </form>
+          <button onClick={handleDelete}>Delete</button>
+      </div>
+    </div>
   );
 }
 
 export default ItemEdit;
-
