@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getLocation, updateLocation } from "../../services/locations";
+import { getLocation, updateLocation, deleteLocation } from "../../services/locations";
 
 function LocationEdit({ locationId, setLocations, showEdit, setShowEdit }) {
   const [locationToUpdate, setLocationToUpdate] = useState({
@@ -38,6 +38,19 @@ function LocationEdit({ locationId, setLocations, showEdit, setShowEdit }) {
     setShowEdit(false); // Hide the form after submission
     setLocationToUpdate({ name: "", address: "" }); // Reset the form inputs
   };
+
+  const handleDelete = async () => {
+    await deleteLocation(locationId);
+
+    // **Remove the deleted location from the state**
+    setLocations((prevLocations) =>
+      prevLocations.filter((location) => location.id !== locationId)
+    );
+
+    // **Hide the form after deletion**
+    setShowEdit(false);
+  };
+
   return (
     <li>
       <form onSubmit={handleSubmit}>
@@ -73,7 +86,7 @@ function LocationEdit({ locationId, setLocations, showEdit, setShowEdit }) {
       >
         Cancel
       </button>
-      <button className="location-delete">Delete</button>
+      <button className="location-delete" onClick={handleDelete} >Delete</button>
     </li>
   );
 }

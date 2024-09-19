@@ -26,3 +26,12 @@ export const addItem = async (locationId, itemData) => {
     console.log(error);
   }
 };
+
+export const updateItem = async (locationId, itemId ,itemData) => {
+    try {
+      const response = await api.put(`/locations/${locationId}/items/${itemId}/`, itemData);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
