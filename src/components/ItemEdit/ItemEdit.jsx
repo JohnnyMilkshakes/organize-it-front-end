@@ -51,11 +51,6 @@ function ItemEdit({
   const handleDelete = async () => {
     await deleteItem(locationId, itemId);
 
-    // Remove the deleted item from the items list (if applicable)
-    // setItem((prevItems) =>
-    //   prevItems.filter((item) => item.id !== itemId)
-    // );
-
     // Navigate back to the item list page or another page after deletion
     navigate(`/locations/${locationId}`);
   };
@@ -116,7 +111,7 @@ function ItemEdit({
       >
         Cancel
       </button>
-      <button onClick={() => {handleDelete}}>Delete</button>
+      <button onClick={handleDelete}>Delete</button>
     </li>
   );
 }
