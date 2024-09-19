@@ -18,7 +18,7 @@
   }
   
   .profile-container {
-    height: 600px;
+    height: 650px;
     width: 1000px;
     display: flex;
     flex-direction: column;
@@ -56,14 +56,27 @@
     list-style-type: none;
     padding: 0;
     margin-bottom: 20px;
-    max-height: 200px;
+    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 400px;
     overflow-y: auto;
+    justify-content: center;
     width: 100%;
   }
   
   ul::-webkit-scrollbar {
     width: 8px;
   }
+
+  ul::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+}
+
+ul::-webkit-scrollbar-track {
+    background-color: transparent;
+}
   
   li {
     background-color: rgba(255, 255, 255, 0.8);
@@ -71,10 +84,17 @@
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
   }
 
   li div {
-    max-width: 50%;
+    max-width: 100%;
+    border-radius: 8px;
   }
   
   li div:hover {
@@ -111,6 +131,29 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
   
+  button.location-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    height: 25px;
+    width: 100%;
+  }
+
+  button.location-cancel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+  }
+
+  button.location-delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+  }
+
   label {
     display: block;
     font-size: 1.1rem;
@@ -135,7 +178,13 @@
     }
   
     ul {
-      max-height: 150px;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    li {
+        width: 100%;
+        height: auto;
     }
   }
   
