@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { getItems } from "../../services/items"; // Service to get items for a location
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import ItemForm from "../../components/ItemForm/ItemForm";
+import ItemTile from "../../components/ItemTile/ItemTile";
 
 const Location = () => {
   const { locationId } = useParams();
@@ -27,42 +27,41 @@ const Location = () => {
         <>
           <h1>Location: {location.name}</h1>
           <p>{location.address}</p>
+
+          <div>
+
+            {/* Display items for the selected location */}
+            {items.length > 0 && (
+              <>
+                <h2>Items</h2>
+                <ul>
+                  {items.map((item) => (
+                    <ItemTile
+                      locationId={locationId}
+                      item={item}
+                      key={item.id}
+                    />
+                  ))}
+                </ul>
+              </>
+            )}
+
+            <button onClick={() => setShowForm(!showForm)}>
+              {showForm ? "Cancel" : "Add New Item"}
+            </button>
+
+          </div>
+
+          {showForm && (
+            <ItemForm
+              locationId={locationId}
+              setShowForm={setShowForm}
+              setItems={setItems}
+            />
+          )}
         </>
       ) : (
         <p>Loading location...</p>
-      )}
-
-      {/* Display items for the selected location */}
-      {locationId && items.length > 0 && (
-        <div>
-          <h2>Items</h2>
-          <ul>
-            {items.map((item) => (
-              <Link
-                to={`/locations/${locationId}/items/${item.id}`}
-                key={item.id}
-              >
-                <li>
-                  <h3>{item.name}</h3>
-                  <p>{item.description}</p>
-                  <p>Quantity: {item.quantity}</p>
-                  <p>Storage Area: {item.storage_area}</p>
-                </li>
-              </Link>
-            ))}
-          </ul>
-          <button onClick={() => setShowForm(!showForm)}>
-            {showForm ? "Cancel" : "Add New Item"}
-          </button>
-        </div>
-      )}
-
-      {showForm && (
-        <ItemForm
-          locationId={locationId}
-          setShowForm={setShowForm}
-          setItems={setItems}
-        />
       )}
     </div>
   );
