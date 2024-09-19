@@ -35,3 +35,12 @@ export const updateLocation = async (locationId, locationData) => {
       console.log(error);
     }
   };
+
+  export const deleteLocation = async (locationId) => {
+    try {
+      const response = await api.delete(`/locations/${locationId}/`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
