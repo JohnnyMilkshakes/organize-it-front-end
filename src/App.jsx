@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import Profile from "./pages/ProfileDisplay/Profile.jsx";
 import Location from "./pages/LocationDisplay/Location.jsx";
 import Item from "./pages/ItemDisplay/Item.jsx";
@@ -25,15 +20,17 @@ const App = () => {
   }, []);
 
   return (
-    <Router>
-      {isSignedIn ? <Navigate to="/profile" replace /> : null}
-      <Routes>
-        <Route path="/" element={<LandingPage setIsSignedIn={setIsSignedIn} />} />
+    <Routes>
+      <>
+        <Route
+          path="/"
+          element={<LandingPage isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />}
+        />
         <Route path="/profile" element={<Profile />} />
         <Route path="/locations/:locationId" element={<Location />} />
         <Route path="/locations/:locationId/items/:itemId" element={<Item />} />
-      </Routes>
-    </Router>
+      </>
+    </Routes>
   );
 };
 
