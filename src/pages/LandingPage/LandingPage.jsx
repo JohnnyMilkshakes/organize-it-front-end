@@ -1,10 +1,10 @@
 import "./LandingPage.css";
 import AuthForm from "../../components/AuthForm/AuthForm";
-const LandingPage = () => {
+const LandingPage = ({setIsSignedIn}) => {
   return (
     <div className="home-container">
       <div className="login-section">
-        <AuthForm />
+        <AuthForm setIsSignedIn={setIsSignedIn}/>
       </div>
       <div className="welcome-section">
         <h1>Welcome to OrganizeIt!</h1>

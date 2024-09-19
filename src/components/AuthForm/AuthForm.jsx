@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signIn, signUp } from "../../services/auth";
 
-function AuthForm() {
+function AuthForm({setIsSignedIn}) {
   const navigate = useNavigate("");
   const [error, setError] = useState("");
   const [isSignUp, setIsSignUp] = useState(false);
@@ -54,6 +54,7 @@ function AuthForm() {
         });
         if (user) {
           console.log("Log in successful!");
+          setIsSignedIn(true)
           navigate("/profile");
         }
       }
