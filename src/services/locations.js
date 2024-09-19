@@ -26,3 +26,12 @@ export const addLocation = async (locationData) => {
     console.log(error);
   }
 };
+
+export const updateLocation = async (locationId, locationData) => {
+    try {
+      const response = await api.put(`/locations/${locationId}/`, locationData);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
