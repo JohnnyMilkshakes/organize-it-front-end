@@ -3,8 +3,9 @@ import "./Profile.css";
 import { getLocations } from "../../services/locations";
 import LocationForm from "../../components/LocationForm/LocationForm";
 import LocationTile from "../../components/LocationTile/LocationTile";
+import LogoutButton from "../../components/NavButtons/LogoutButton";
 
-const Profile = () => {
+const Profile = ({ setIsSignedIn }) => {
   const [locations, setLocations] = useState([]);
   const [showForm, setShowForm] = useState(false); // State to show/hide the form
 
@@ -19,6 +20,7 @@ const Profile = () => {
 
   return (
     <div className="profile-container">
+      <LogoutButton setIsSignedIn={setIsSignedIn}/>
       <h1>Your Profile</h1>
       <h2>Created Locations</h2>
       <ul>
