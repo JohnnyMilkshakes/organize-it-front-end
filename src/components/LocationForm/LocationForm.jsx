@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { addLocation } from "../../services/locations";
-function LocationForm({setLocations, setShowForm}) {
-    const [newLocation, setNewLocation] = useState({ name: "", address: "" }); // State to track form input
+function LocationForm({ setLocations, setShowForm }) {
+  const [newLocation, setNewLocation] = useState({ name: "", address: "" }); // State to track form input
 
-
-      // Handle form input changes
+  // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewLocation((prevState) => ({
@@ -22,7 +21,13 @@ function LocationForm({setLocations, setShowForm}) {
     setNewLocation({ name: "", address: "" }); // Reset the form inputs
   };
   return (
-    <form onSubmit={handleFormSubmit}>
+    <div className="modal-overlay">
+      <div className="add-new-location">
+        <button className="close-button" onClick={() => setShowForm(false)}>
+          X
+        </button>
+        <form className="location-form" onSubmit={handleFormSubmit}>
+          <h3>Add New Location</h3>
           <div>
             <label htmlFor="name">Location Name:</label>
             <input
@@ -47,7 +52,9 @@ function LocationForm({setLocations, setShowForm}) {
           </div>
           <button type="submit">Submit</button>
         </form>
-  )
+      </div>
+    </div>
+  );
 }
 
-export default LocationForm
+export default LocationForm;

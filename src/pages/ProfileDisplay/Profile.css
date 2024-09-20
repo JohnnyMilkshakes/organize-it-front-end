@@ -171,7 +171,48 @@ ul::-webkit-scrollbar-track {
     color:#d14407;
     margin-bottom: 5px;
   }
+
+  .location-form label {
+    color: #d14407;
+  }
+
+  .location-form div {
+    margin-bottom: 10px;
+  }
   
+  .location-form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .location-form button {
+    background-color: #c13b05;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .location-form button:hover {
+    background-color: #d14407;
+  }
+  
+  .add-new-location {
+      background-color: #ebe3e3;
+      color: #c13b05;
+      padding: 20px;
+      border-radius: 10px;
+      width: 400px;
+      max-width: 90%;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+  }
+
   @media (max-width: 768px) {
     .profile-container {
       width: 90%;
