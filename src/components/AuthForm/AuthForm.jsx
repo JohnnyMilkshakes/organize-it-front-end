@@ -14,7 +14,6 @@ function AuthForm({ setIsSignedIn }) {
     confirmPassword: "",
   });
 
-  const [showMessage, setShowMessage] = useState(false);
   const [validations, setValidations] = useState({
     letter: false,
     capital: false,
@@ -57,7 +56,7 @@ function AuthForm({ setIsSignedIn }) {
       capital: capital.test(password),
       number: number.test(password),
       length: password.length >= 8,
-      matching: (password === confirmPassword) && confirmPassword.length >= 8,
+      matching: (password === confirmPassword) && (confirmPassword.length >= 1),
     });
   };
 
@@ -67,8 +66,11 @@ function AuthForm({ setIsSignedIn }) {
 
     try {
       if (isSignUp) {
-        if (formData.password !== formData.confirmPassword) {
-          setError("Passwords do not match");
+        const allTrue = (validationObject) =>
+          Object.values(validationObject).every((value) => value === true);
+
+        if (!allTrue(validations)) {
+          setError("Password validation failed");
           return;
         }
 
@@ -133,8 +135,6 @@ function AuthForm({ setIsSignedIn }) {
             placeholder="Password"
             value={formData.password}
             onChange={handleInputChange}
-            onFocus={() => setShowMessage(true)}
-            onBlur={() => setShowMessage(false)}
             required
           />
         </div>
@@ -146,8 +146,6 @@ function AuthForm({ setIsSignedIn }) {
               placeholder="Confirm Password"
               value={formData.confirmPassword}
               onChange={handleInputChange}
-              onFocus={() => setShowMessage(true)}
-              onBlur={() => setShowMessage(false)}
               required
             />
           </div>
@@ -159,7 +157,7 @@ function AuthForm({ setIsSignedIn }) {
             ? "Already have an account? Log In"
             : "Don’t have an account? Sign Up"}
         </p>
-        {showMessage && (
+        {isSignUp && (
           <div id="message">
             <h3>Password must contain the following:</h3>
             <p id="letter" className={validations.letter ? "valid" : "invalid"}>

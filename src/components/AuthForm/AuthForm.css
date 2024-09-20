@@ -34,3 +34,7 @@
     left: -35px;
     content: "❌";
 }
+
+.error-message {
+    color: red;
+}

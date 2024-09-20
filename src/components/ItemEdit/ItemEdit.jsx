@@ -6,7 +6,6 @@ function ItemEdit({
   locationId,
   itemId,
   setItem,
-  showEditForm,
   setShowEditForm,
 }) {
   const emptyForm = {
