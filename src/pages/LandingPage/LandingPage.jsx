@@ -1,6 +1,7 @@
 import "./LandingPage.css";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 const LandingPage = ({ isSignedIn, setIsSignedIn }) => {
   // State to toggle the visibility of each text box
