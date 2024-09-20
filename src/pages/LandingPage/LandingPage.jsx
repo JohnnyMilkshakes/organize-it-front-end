@@ -45,9 +45,9 @@ const LandingPage = ({ isSignedIn, setIsSignedIn }) => {
                 Follow the steps below to manage your inventory effectively:
               </p>
               <ul>
-                <li>Step 1: Create your locations and storage areas.</li>
-                <li>Step 2: Add your items to each location.</li>
-                <li>Step 3: Track your inventory and manage stock levels.</li>
+                <li>Step 1: Create your locations with a name and address. You'll have the ability to edit or delete it.</li>
+                <li>Step 2: After creating one location or many, you can add the items that are in that site.</li>
+                <li>Step 3: You can edit or delete the items, as well.</li>
               </ul>
             </div>
           )}
@@ -57,9 +57,7 @@ const LandingPage = ({ isSignedIn, setIsSignedIn }) => {
             <div className="info-box">
               <h2>About the Team</h2>
               <p>
-                Our team consists of passionate developers and inventory experts who
-                believe in simplifying the way businesses manage their inventory. We are
-                committed to helping you stay organized with ease!
+                Our team consists of passionate developers Jonathan, Wendy, and Robert.
               </p>
             </div>
           )}
