@@ -1,6 +1,7 @@
 import "./LandingPage.css";
 import AuthForm from "../../components/AuthForm/AuthForm";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
+
 const LandingPage = ({ isSignedIn, setIsSignedIn }) => {
   return (
     <>
@@ -20,6 +21,15 @@ const LandingPage = ({ isSignedIn, setIsSignedIn }) => {
             errors, and stay in control of your business. Get started with
             OrganizeIt and simplify your inventory today!
           </p>
+          {/* Adding buttons for Further Instructions and About the Team */}
+          <div className="button-container">
+            <Link to="/instructions" className="btn">
+              Further Instructions
+            </Link>
+            <Link to="/about" className="btn">
+              About the Team
+            </Link>
+          </div>
         </div>
       </div>
     </>
@@ -27,3 +37,4 @@ const LandingPage = ({ isSignedIn, setIsSignedIn }) => {
 };
 
 export default LandingPage;
+
