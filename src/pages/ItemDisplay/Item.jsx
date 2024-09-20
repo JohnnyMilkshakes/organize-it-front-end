@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { getItem } from "../../services/items"; // Import getItems and editItem
 import { useParams } from "react-router-dom";
 import ItemEdit from "../../components/ItemEdit/ItemEdit";
+import LogoutButton from "../../components/NavButtons/LogoutButton";
 import "./Item.css";
 
-const Item = () => {
+const Item = ({ setIsSignedIn }) => {
   const { locationId, itemId } = useParams();
   const [item, setItem] = useState(null); // State for the selected item
   const [showEditForm, setShowEditForm] = useState(false); // State to show/hide the edit form
@@ -21,6 +22,7 @@ const Item = () => {
     <div>
       {item ? (
         <div className="item-container">
+          <LogoutButton setIsSignedIn={setIsSignedIn}/>
           <h1>Displaying Item: {item.name}</h1>
           <h2>Item Details</h2>
           <p>Description: {item.description}</p>

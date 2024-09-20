@@ -4,11 +4,12 @@ import { getLocation } from "../../services/locations";
 import { useParams } from "react-router-dom";
 import ItemForm from "../../components/ItemForm/ItemForm";
 import ItemTile from "../../components/ItemTile/ItemTile";
-import './Location.css'
+import LogoutButton from "../../components/NavButtons/LogoutButton";
+import "./Location.css";
 
-const Location = () => {
+const Location = ({ setIsSignedIn }) => {
   const { locationId } = useParams();
-  const [site, setSite] = useState(null); 
+  const [site, setSite] = useState(null);
   const [items, setItems] = useState([]); // Track items for selected location
   const [showForm, setShowForm] = useState(false); // Show/hide the add item form
 
@@ -39,14 +40,12 @@ const Location = () => {
   return (
     <div className="location-container">
       {site ? (
-
         <>
+          <LogoutButton setIsSignedIn={setIsSignedIn} />
           <h1>Location: {site.name}</h1>
           <p>{site.address}</p>
 
           <div>
-
-            {/* Display items for the selected location */}
             {items.length > 0 && (
               <>
                 <h2>Items</h2>
@@ -62,12 +61,11 @@ const Location = () => {
               </>
             )}
 
-          <div className="button-wrapper">
-            <button onClick={() => setShowForm(!showForm)}>
-              {showForm ? "Cancel" : "Add New Item"}
-            </button>
-          </div>
-
+            <div className="button-wrapper">
+              <button onClick={() => setShowForm(!showForm)}>
+                {showForm ? "Cancel" : "Add New Item"}
+              </button>
+            </div>
           </div>
 
           {showForm && (
