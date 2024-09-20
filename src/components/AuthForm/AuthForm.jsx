@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signIn, signUp } from "../../services/auth";
+import "./AuthForm.css";
 
-function AuthForm() {
+function AuthForm({ setIsSignedIn }) {
   const navigate = useNavigate("");
   const [error, setError] = useState("");
   const [isSignUp, setIsSignUp] = useState(false);
@@ -13,17 +14,50 @@ function AuthForm() {
     confirmPassword: "",
   });
 
+  const [validations, setValidations] = useState({
+    letter: false,
+    capital: false,
+    number: false,
+    length: false,
+    matching: false,
+  });
+
   const signUpForm = () => {
     setIsSignUp(!isSignUp);
     setError("");
   };
 
   const handleInputChange = (e) => {
-    const newFormData = {
+    const { name, value } = e.target;
+    // Update form data first
+    const updatedFormData = {
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     };
-    setFormData(newFormData);
+    setFormData(updatedFormData);
+
+    // Validate the password after form data update
+    if (name === "password" || name === "confirmPassword") {
+      validatePassword(
+        updatedFormData.password,
+        updatedFormData.confirmPassword
+      );
+    }
+  };
+
+  // Password validation logic
+  const validatePassword = (password, confirmPassword) => {
+    const letter = /[a-z]/g;
+    const capital = /[A-Z]/g;
+    const number = /[0-9]/g;
+
+    setValidations({
+      letter: letter.test(password),
+      capital: capital.test(password),
+      number: number.test(password),
+      length: password.length >= 8,
+      matching: (password === confirmPassword) && (confirmPassword.length >= 1),
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -32,8 +66,11 @@ function AuthForm() {
 
     try {
       if (isSignUp) {
-        if (formData.password !== formData.confirmPassword) {
-          setError("Passwords do not match");
+        const allTrue = (validationObject) =>
+          Object.values(validationObject).every((value) => value === true);
+
+        if (!allTrue(validations)) {
+          setError("Password validation failed");
           return;
         }
 
@@ -54,6 +91,7 @@ function AuthForm() {
         });
         if (user) {
           console.log("Log in successful!");
+          setIsSignedIn(true);
           navigate("/profile");
         }
       }
@@ -119,6 +157,32 @@ function AuthForm() {
             ? "Already have an account? Log In"
             : "Don’t have an account? Sign Up"}
         </p>
+        {isSignUp && (
+          <div id="message">
+            <h3>Password must contain the following:</h3>
+            <p id="letter" className={validations.letter ? "valid" : "invalid"}>
+              A <b>lowercase</b> letter
+            </p>
+            <p
+              id="capital"
+              className={validations.capital ? "valid" : "invalid"}
+            >
+              A <b>capital (uppercase)</b> letter
+            </p>
+            <p id="number" className={validations.number ? "valid" : "invalid"}>
+              A <b>number</b>
+            </p>
+            <p id="length" className={validations.length ? "valid" : "invalid"}>
+              Minimum <b>8 characters</b>
+            </p>
+            <p
+              id="matching"
+              className={validations.matching ? "valid" : "invalid"}
+            >
+              Password fields must <b>match</b>
+            </p>
+          </div>
+        )}
       </form>
     </>
   );

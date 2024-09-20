@@ -33,7 +33,10 @@ function ItemForm({ locationId, setItems, setShowForm }) {
   };
   return (
     <>
-      <form onSubmit={handleFormSubmit}>
+    <div className="modal-overlay">
+    <div className="modal-content">
+      <button className="close-button" onClick={() => setShowForm(false)}>X</button>
+      <form className="item-form" onSubmit={handleFormSubmit}>
         <h3>Add New Item</h3>
         <div>
           <label htmlFor="name">Item Name:</label>
@@ -81,6 +84,8 @@ function ItemForm({ locationId, setItems, setShowForm }) {
         </div>
         <button type="submit">Submit</button>
       </form>
+    </div>
+    </div>
     </>
   );
 }
