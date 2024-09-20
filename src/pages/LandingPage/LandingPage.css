@@ -95,6 +95,40 @@
   text-decoration: underline;
 }
 
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #d14407; /* Customize your color */
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #ff6e0d; /* Slightly darker shade for hover */
+}
+
+.info-box {
+    color: #f6f3f2;
+
+}    
+
+.instructions-info  {
+    color:#d14407;
+
+}
+
+
+/* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
   .home-container {
     flex-direction: column;

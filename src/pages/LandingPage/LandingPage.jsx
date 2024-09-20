@@ -30,7 +30,7 @@ const LandingPage = ({ isSignedIn, setIsSignedIn }) => {
           {/* Buttons for toggling content */}
           <div className="button-container">
             <button className="btn" onClick={() => setShowInstructions(!showInstructions)}>
-              {showInstructions ? "Hide Instructions" : "Further Instructions"}
+              {showInstructions ? "Hide Instructions" : "Instructions"}
             </button>
             <button className="btn" onClick={() => setShowAbout(!showAbout)}>
               {showAbout ? "Hide About" : "About the Team"}
@@ -40,16 +40,18 @@ const LandingPage = ({ isSignedIn, setIsSignedIn }) => {
           {/* Conditionally rendering the instruction text */}
           {showInstructions && (
             <div className="info-box">
-              <h2>Further Instructions</h2>
+              <h2>Instructions</h2>
               <p>
-                Here are the further instructions to help you get started with OrganizeIt.
+                Here are the instructions to help you get started with OrganizeIt.
                 Follow the steps below to manage your inventory effectively:
               </p>
-              <ul>
-                <li>Step 1: Create your locations with a name and address. You'll have the ability to edit or delete it.</li>
-                <li>Step 2: After creating one location or many, you can add the items that are in that site.</li>
-                <li>Step 3: You can edit or delete the items, as well.</li>
-              </ul>
+              <div className="instructions-info"> {/* Correct placement of instructions-info */}
+                <ul>
+                  <li>Step 1: Create your locations with a name and address. You'll have the ability to edit or delete it.</li>
+                  <li>Step 2: After creating one location or many, you can add the items that are in that site.</li>
+                  <li>Step 3: You can edit or delete the items, as well.</li>
+                </ul>
+              </div>
             </div>
           )}
 
@@ -69,3 +71,4 @@ const LandingPage = ({ isSignedIn, setIsSignedIn }) => {
 };
 
 export default LandingPage;
+
