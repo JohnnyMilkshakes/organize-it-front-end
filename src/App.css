@@ -18,6 +18,29 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.nav-buttons {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  color: #333;
+  transition: background-color 0.3s ease;
+}
+
+.nav-buttons:hover {
+  background-color: #f0f0f0;
+}
+
+.nav-icon {
+  font-size: 1.2rem;
+  margin-right: 8px;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
