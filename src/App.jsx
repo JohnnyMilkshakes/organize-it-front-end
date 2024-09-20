@@ -5,6 +5,7 @@ import Item from "./pages/ItemDisplay/Item.jsx";
 import LandingPage from "./pages/LandingPage/LandingPage.jsx";
 import { useEffect, useState } from "react";
 import { getToken } from "./services/apiConfig.js";
+import './App.css'
 
 const App = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
