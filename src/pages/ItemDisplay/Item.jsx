@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getItem } from "../../services/items"; // Import getItems and editItem
 import { useParams } from "react-router-dom";
 import ItemEdit from "../../components/ItemEdit/ItemEdit";
+import ProfileButton from "../../components/NavButtons/ProfileButton";
 import LogoutButton from "../../components/NavButtons/LogoutButton";
 import "./Item.css";
 
@@ -22,7 +23,10 @@ const Item = ({ setIsSignedIn }) => {
     <div>
       {item ? (
         <div className="item-container">
-          <LogoutButton setIsSignedIn={setIsSignedIn}/>
+          <div className="nav-buttons">
+            <ProfileButton />
+            <LogoutButton setIsSignedIn={setIsSignedIn} />
+          </div>
           <h1>Displaying Item: {item.name}</h1>
           <h2>Item Details</h2>
           <p>Description: {item.description}</p>

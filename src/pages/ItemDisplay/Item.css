@@ -29,15 +29,6 @@
     margin-top: 20px;
 }
 
-.item-container .logout-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  margin: 0;
-}
-
 h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;

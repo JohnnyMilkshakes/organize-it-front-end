@@ -4,6 +4,7 @@ import { getLocation } from "../../services/locations";
 import { useParams } from "react-router-dom";
 import ItemForm from "../../components/ItemForm/ItemForm";
 import ItemTile from "../../components/ItemTile/ItemTile";
+import ProfileButton from "../../components/NavButtons/ProfileButton";
 import LogoutButton from "../../components/NavButtons/LogoutButton";
 import "./Location.css";
 
@@ -41,7 +42,10 @@ const Location = ({ setIsSignedIn }) => {
     <div className="location-container">
       {site ? (
         <>
-          <LogoutButton setIsSignedIn={setIsSignedIn} />
+          <div className="nav-buttons">
+            <ProfileButton />
+            <LogoutButton setIsSignedIn={setIsSignedIn} />
+          </div>
           <h1>Location: {site.name}</h1>
           <p>{site.address}</p>
 
