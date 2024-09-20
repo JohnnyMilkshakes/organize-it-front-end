@@ -56,7 +56,7 @@ function AuthForm({ setIsSignedIn }) {
       capital: capital.test(password),
       number: number.test(password),
       length: password.length >= 8,
-      matching: (password === confirmPassword) && (confirmPassword.length >= 1),
+      matching: password === confirmPassword && confirmPassword.length >= 1,
     });
   };
 
