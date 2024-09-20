@@ -26,9 +26,9 @@ const App = () => {
           path="/"
           element={<LandingPage isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />}
         />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/locations/:locationId" element={<Location />} />
-        <Route path="/locations/:locationId/items/:itemId" element={<Item />} />
+        <Route path="/profile" element={<Profile setIsSignedIn={setIsSignedIn} />} />
+        <Route path="/locations/:locationId" element={<Location setIsSignedIn={setIsSignedIn} />} />
+        <Route path="/locations/:locationId/items/:itemId" element={<Item setIsSignedIn={setIsSignedIn} />} />
       </>
     </Routes>
   );
