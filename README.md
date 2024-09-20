@@ -9,17 +9,12 @@
 
 ## Links
 
-***OrganizeIt Link:*** 
+***OrganizeIt Link:*** [OrganiseIT](https://admirable-cranachan-fb11f5.netlify.app/)
 
 ***Planning Link:*** [Proposal](https://trello.com/invite/b/66e44ac12dfbd67bdb0cc3d4/ATTI4f9b82867f029411b5b7f336bfaac1a826CFCE5A/final-project)
 
 ***Backend Repo:*** [OrganizeIT-backend](https://github.com/RobertAFranco/OrganizeIT-backend/tree/dev)
 
-## Attributions
-
-*(Was used for guidance and explanation)*
-
-[ChatGPT](https://chatgpt.com)
 
 ## Technologies Used
 - Django
