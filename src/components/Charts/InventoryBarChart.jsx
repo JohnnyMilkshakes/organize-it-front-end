@@ -1,64 +1,68 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
 } from 'chart.js';
 
-// Register required components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const InventoryBarChart = ({ items }) => {
-    // Process items to calculate total quantities by item name
-    const itemQuantities = items.reduce((acc, item) => {
-        acc[item.name] = (acc[item.name] || 0) + item.quantity;
-        return acc;
-    }, {});
+  const itemQuantities = items.reduce((acc, item) => {
+    acc[item.name] = (acc[item.name] || 0) + item.quantity;
+    return acc;
+  }, {});
 
-    // Prepare data for Chart.js
-    const labels = Object.keys(itemQuantities);
-    const quantities = Object.values(itemQuantities);
+  const labels = Object.keys(itemQuantities);
+  const quantities = Object.values(itemQuantities);
 
-    const chartData = {
-        labels: labels,
-        datasets: [
-            {
-                label: 'Total Quantity of Items',
-                data: quantities,
-                backgroundColor: 'rgba(209, 68, 7, 1)',  // Orange color for bars
-                borderColor: 'rgba(255, 140, 0, 1)',  // Darker orange for border
-                borderWidth: 1,
-            },
-        ],
-    };
+  const chartHeight = labels.length * 50;  // Dynamic height based on number of items
 
-    const options = {
-        responsive: true,
-        scales: {
-            y: {
-                beginAtZero: false,  // Allow the Y-axis to include negative numbers
-            },
+  const chartData = {
+    labels: labels,
+    datasets: [
+      {
+        label: 'Total Quantity of Items',
+        data: quantities,
+        backgroundColor: 'rgba(209, 68, 7, 1)',  // Orange color for bars
+        borderColor: 'rgba(255, 140, 0, 1)',  // Darker orange for border
+        borderWidth: 1,
+        barThickness: 20,  // Adjust the thickness of the bars
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    indexAxis: 'y',  // Horizontal bar chart for better readability
+    scales: {
+      x: {
+        ticks: {
+          maxRotation: 45,  // Rotate X-axis labels if using a vertical chart
+          minRotation: 45,
         },
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Item Quantities Overview',
-            },
-        },
-    };
+      },
+      y: {
+        beginAtZero: false,  // Allow for negative numbers
+      },
+    },
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Item Quantities Overview',
+      },
+    },
+  };
 
-    return <Bar data={chartData} options={options} />;
+  return <Bar data={chartData} options={options} height={chartHeight} />;
 };
 
 export default InventoryBarChart;
-
-
-
