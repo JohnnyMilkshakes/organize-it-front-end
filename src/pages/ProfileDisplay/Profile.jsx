@@ -10,13 +10,14 @@ import SearchBar from "../../components/SearchBar/SearchBar";  // Search bar com
 import './Profile.css';  // Import CSS for styling
 
 const Profile = ({ setIsSignedIn }) => {
-  const [locations, setLocations] = useState([]);
+  const [locations, setLocations] = useState([]);  // State for locations
   const [allItems, setAllItems] = useState({});  // Stores items for each location
-  const [filteredLocations, setFilteredLocations] = useState([]);
+  const [filteredLocations, setFilteredLocations] = useState([]);  // State for filtered locations
   const [filteredItems, setFilteredItems] = useState([]);  // Only show items when searched
   const [searchQuery, setSearchQuery] = useState("");  // State for search query
-  const [showForm, setShowForm] = useState(false);
-
+  const [showForm, setShowForm] = useState(false);  // Toggle form visibility
+  const [selectedLocationId, setSelectedLocationId] = useState(null);  // For editing location
+  
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -84,7 +85,15 @@ const Profile = ({ setIsSignedIn }) => {
       <ul>
         {filteredLocations.length > 0 ? (
           filteredLocations.map((location) => (
-            <LocationTile key={location.id} location={location} />
+            <LocationTile 
+              key={location.id} 
+              location={location}
+              setLocations={setLocations}
+              onEdit={() => {
+                setSelectedLocationId(location.id);
+                setShowForm(true);
+              }}  // Enable editing
+            />
           ))
         ) : (
           <li>No matching locations found.</li>
