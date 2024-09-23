@@ -5,8 +5,11 @@ import { getItems } from "../../services/items";
 import LocationTile from "../../components/LocationTile/LocationTile";
 import ItemTile from "../../components/ItemTile/ItemTile";
 import LogoutButton from "../../components/NavButtons/LogoutButton";
+import LocationForm from "../../components/LocationForm/LocationForm";
 import SearchBar from "../../components/SearchBar/SearchBar";  // Import SearchBar component
 import { useParams } from "react-router-dom";
+import "./Profile.css";
+
 
 const Profile = ({ setIsSignedIn }) => {
   const { locationId } = useParams();  // Get locationId from the URL (if applicable)
