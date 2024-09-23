@@ -30,7 +30,7 @@ const InventoryBarChart = ({ items }) => {
             {
                 label: 'Total Quantity of Items',
                 data: quantities,
-                backgroundColor: 'rgba(255, 165, 0, 0.6)',  // Orange color for bars
+                backgroundColor: 'rgba(209, 68, 7, 1)',  // Orange color for bars
                 borderColor: 'rgba(255, 140, 0, 1)',  // Darker orange for border
                 borderWidth: 1,
             },
