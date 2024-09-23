@@ -32,32 +32,49 @@ const InventoryBarChart = ({ items }) => {
         backgroundColor: 'rgba(209, 68, 7, 1)',  // Orange color for bars
         borderColor: 'rgba(255, 140, 0, 1)',  // Darker orange for border
         borderWidth: 1,
-        barThickness: 20,  // Adjust the thickness of the bars
+        barThickness: 20,
       },
     ],
   };
 
   const options = {
     responsive: true,
-    indexAxis: 'y',  // Horizontal bar chart for better readability
+    indexAxis: 'y',  // Horizontal bar chart
     scales: {
       x: {
         ticks: {
-          maxRotation: 45,  // Rotate X-axis labels if using a vertical chart
+          color: '#FFFFFF',  // Change X-axis label color to white
+          maxRotation: 45,  // Rotate X-axis labels if needed
           minRotation: 45,
+        },
+        grid: {
+          color: 'rgba(255, 255, 255, 0.1)',  // Optional: Change grid line color
         },
       },
       y: {
+        ticks: {
+          color: '#FFFFFF',  // Change Y-axis label color to white
+        },
+        grid: {
+          color: 'rgba(255, 255, 255, 0.1)',  // Optional: Change grid line color
+        },
         beginAtZero: false,  // Allow for negative numbers
       },
     },
     plugins: {
       legend: {
-        position: 'top',
+        labels: {
+          color: '#FFFFFF',  // Change legend text color to white
+        },
+      },
+      tooltip: {
+        bodyColor: '#FFFFFF',  // Change tooltip text color to white
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',  // Optional: Change tooltip background color
       },
       title: {
         display: true,
         text: 'Item Quantities Overview',
+        color: '#FFFFFF',  // Change title text color to white
       },
     },
   };
