@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for routing
 import { getLocation, updateLocation, deleteLocation } from "../../services/locations";
 
 function LocationEdit({ locationId, setLocations, showEdit, setShowEdit }) {
@@ -6,6 +7,7 @@ function LocationEdit({ locationId, setLocations, showEdit, setShowEdit }) {
     name: "",
     address: "",
   }); // State to track form input
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const fetchLocation = async () => {
@@ -42,13 +44,13 @@ function LocationEdit({ locationId, setLocations, showEdit, setShowEdit }) {
   const handleDelete = async () => {
     await deleteLocation(locationId);
 
-    // **Remove the deleted location from the state**
+    // Remove the deleted location from the state
     setLocations((prevLocations) =>
       prevLocations.filter((location) => location.id !== locationId)
     );
 
-    // **Hide the form after deletion**
-    setShowEdit(false);
+    // Redirect to another page, like the profile page, after deletion
+    navigate("/profile"); // Replace '/profile' with your desired path
   };
 
   return (
@@ -86,9 +88,10 @@ function LocationEdit({ locationId, setLocations, showEdit, setShowEdit }) {
       >
         Cancel
       </button>
-      <button className="location-delete" onClick={handleDelete} >Delete</button>
+      <button className="location-delete" onClick={handleDelete}>Delete</button>
     </li>
   );
 }
 
 export default LocationEdit;
+

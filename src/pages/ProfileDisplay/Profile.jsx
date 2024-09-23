@@ -1,22 +1,19 @@
-// src/pages/ProfileDisplay/Profile.jsx
 import { useState, useEffect } from "react";
-import { getLocations } from "../../services/locations";
-import { getItems } from "../../services/items";
-import LocationTile from "../../components/LocationTile/LocationTile";
-import ItemTile from "../../components/ItemTile/ItemTile";
-import LogoutButton from "../../components/NavButtons/LogoutButton";
-import LocationForm from "../../components/LocationForm/LocationForm";
-import SearchBar from "../../components/SearchBar/SearchBar";  // Import SearchBar component
-import { useParams } from "react-router-dom";
-import "./Profile.css";
-
+import { getLocations } from "../../services/locations";  // Fetch locations from API
+import { getItems } from "../../services/items";  // Fetch items by locationId from API
+import { Link } from "react-router-dom";  // Import Link from react-router-dom
+import LocationTile from "../../components/LocationTile/LocationTile";  // Render each location
+import ItemTile from "../../components/ItemTile/ItemTile";  // Render each item
+import LocationForm from "../../components/LocationForm/LocationForm";  // Form to add locations
+import LogoutButton from "../../components/NavButtons/LogoutButton";  // Logout functionality
+import SearchBar from "../../components/SearchBar/SearchBar";  // Search bar component
+import './Profile.css';  // Import CSS for styling
 
 const Profile = ({ setIsSignedIn }) => {
-  const { locationId } = useParams();  // Get locationId from the URL (if applicable)
   const [locations, setLocations] = useState([]);
-  const [items, setItems] = useState([]);
+  const [allItems, setAllItems] = useState({});  // Stores items for each location
   const [filteredLocations, setFilteredLocations] = useState([]);
-  const [filteredItems, setFilteredItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);  // Only show items when searched
   const [searchQuery, setSearchQuery] = useState("");  // State for search query
   const [showForm, setShowForm] = useState(false);
 
@@ -27,34 +24,52 @@ const Profile = ({ setIsSignedIn }) => {
         setLocations(userLocations);
         setFilteredLocations(userLocations);
 
-        // Only fetch items if locationId is defined
-        if (locationId) {
-          const userItems = await getItems(locationId);
-          setItems(userItems);
-          setFilteredItems(userItems);
+        // Fetch items for each location and assign location_id to each item
+        const itemsForLocations = {};
+        for (let location of userLocations) {
+          const items = await getItems(location.id);  // Fetch items for each location
+          
+          // Ensure each item has the location_id assigned
+          itemsForLocations[location.id] = items.map(item => ({
+            ...item,
+            location_id: location.id  // Assign location_id to each item
+          }));
         }
+        setAllItems(itemsForLocations);  // Store items for each location
       } catch (error) {
         console.error("Error loading data:", error);
       }
     };
 
     loadData();
-  }, [locationId]);
+  }, []);
 
   useEffect(() => {
+    // Filter locations based on the search query
     const filteredLoc = locations.filter((location) =>
       location.name.toLowerCase().includes(searchQuery) ||
       location.address.toLowerCase().includes(searchQuery)
     );
-
-    const filteredItm = items.filter((item) =>
-      item.name.toLowerCase().includes(searchQuery) ||
-      item.description.toLowerCase().includes(searchQuery)
-    );
-
     setFilteredLocations(filteredLoc);
-    setFilteredItems(filteredItm);
-  }, [searchQuery, locations, items]);
+
+    // Filter items based on the search query
+    const filteredItm = [];
+    for (let location of locations) {
+      const locationItems = allItems[location.id] || [];
+      const matchingItems = locationItems.filter((item) =>
+        item.name.toLowerCase().includes(searchQuery) ||
+        item.description.toLowerCase().includes(searchQuery)
+      );
+      filteredItm.push(...matchingItems);
+    }
+
+    // Only set filteredItems if there's a search query, otherwise clear it
+    if (searchQuery.trim()) {
+      setFilteredItems(filteredItm);
+    } else {
+      setFilteredItems([]);  // Clear items if there's no search
+    }
+  }, [searchQuery, locations, allItems]);
 
   return (
     <div className="profile-container">
@@ -76,17 +91,22 @@ const Profile = ({ setIsSignedIn }) => {
         )}
       </ul>
 
-      {/* Render Filtered Items */}
-      {locationId && (
+      {/* Only render filtered items if there's a search query */}
+      {searchQuery.trim() && (
         <>
           <h2>Items</h2>
           <ul>
             {filteredItems.length > 0 ? (
               filteredItems.map((item) => (
-                <ItemTile key={item.id} item={item} />
+                // Link to the item's detail page
+                <li key={item.id}>
+                  <Link to={`/locations/${item.location_id}/items/${item.id}`}>
+                    {item.name}
+                  </Link>
+                </li>
               ))
             ) : (
-              <li>No matching items found for this location.</li>
+              <li>No matching items found.</li>
             )}
           </ul>
         </>
@@ -104,5 +124,3 @@ const Profile = ({ setIsSignedIn }) => {
 };
 
 export default Profile;
-
-
