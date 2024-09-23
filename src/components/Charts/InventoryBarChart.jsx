@@ -1,51 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Bar } from 'react-chartjs-2';
-import { getItems } from '../api/getItems';  // Import the Axios-based fetch function
 
-const InventoryBarChart = () => {
-    const [chartData, setChartData] = useState({ labels: [], datasets: [] });
+const InventoryBarChart = ({ items }) => {
+    // Process items to calculate total quantities by item type or other criteria
+    const itemQuantities = items.reduce((acc, item) => {
+        acc[item.name] = (acc[item.name] || 0) + item.quantity;  // Sum quantities by item name
+        return acc;
+    }, {});
 
-    useEffect(() => {
-        const loadData = async () => {
-            const items = await getItems();  // Use Axios to fetch items from the backend
+    // Prepare data for Chart.js
+    const labels = Object.keys(itemQuantities);  // Item names
+    const quantities = Object.values(itemQuantities);  // Quantities of each item
 
-            // Process data to group by location
-            const locationQuantities = items.reduce((acc, item) => {
-                const locationName = item.location.name;  // Assuming location is nested within item
-                acc[locationName] = (acc[locationName] || 0) + item.quantity;
-                return acc;
-            }, {});
-
-            // Prepare data for Chart.js
-            const labels = Object.keys(locationQuantities);  // Get the location names
-            const quantities = Object.values(locationQuantities);  // Get total quantities per location
-
-            setChartData({
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Total Quantity of Items',
-                        data: quantities,
-                        backgroundColor: 'rgba(75, 192, 192, 0.6)',  // Bar colors
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1,
-                    },
-                ],
-            });
-        };
-
-        loadData();  // Trigger data loading on component mount
-    }, []);
+    const chartData = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'Total Quantity of Items',
+                data: quantities,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+            },
+        ],
+    };
 
     const options = {
         responsive: true,
         plugins: {
             legend: {
-                position: 'top',  // Position of legend
+                position: 'top',
             },
             title: {
                 display: true,
-                text: 'Item Quantities by Location',  // Chart title
+                text: 'Item Quantities Overview',
             },
         },
     };
@@ -54,3 +42,4 @@ const InventoryBarChart = () => {
 };
 
 export default InventoryBarChart;
+
