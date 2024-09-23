@@ -1,10 +1,12 @@
+// src/pages/ProfileDisplay/Profile.jsx
 import { useState, useEffect } from "react";
 import { getLocations } from "../../services/locations";
 import { getItems } from "../../services/items";
 import LocationTile from "../../components/LocationTile/LocationTile";
 import ItemTile from "../../components/ItemTile/ItemTile";
 import LogoutButton from "../../components/NavButtons/LogoutButton";
-import { useParams } from "react-router-dom";  // Assuming you're getting locationId from the URL
+import SearchBar from "../../components/SearchBar/SearchBar";  // Import SearchBar component
+import { useParams } from "react-router-dom";
 
 const Profile = ({ setIsSignedIn }) => {
   const { locationId } = useParams();  // Get locationId from the URL (if applicable)
@@ -12,7 +14,7 @@ const Profile = ({ setIsSignedIn }) => {
   const [items, setItems] = useState([]);
   const [filteredLocations, setFilteredLocations] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");  // State for search query
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
@@ -27,8 +29,6 @@ const Profile = ({ setIsSignedIn }) => {
           const userItems = await getItems(locationId);
           setItems(userItems);
           setFilteredItems(userItems);
-        } else {
-          console.error("Location ID is undefined");
         }
       } catch (error) {
         console.error("Error loading data:", error);
@@ -38,36 +38,28 @@ const Profile = ({ setIsSignedIn }) => {
     loadData();
   }, [locationId]);
 
-  // Handle search input change
-  const handleSearch = (e) => {
-    const query = e.target.value.toLowerCase();
-    setSearchQuery(query);
-
+  useEffect(() => {
     const filteredLoc = locations.filter((location) =>
-      location.name.toLowerCase().includes(query)
+      location.name.toLowerCase().includes(searchQuery) ||
+      location.address.toLowerCase().includes(searchQuery)
     );
 
     const filteredItm = items.filter((item) =>
-      item.name.toLowerCase().includes(query)
+      item.name.toLowerCase().includes(searchQuery) ||
+      item.description.toLowerCase().includes(searchQuery)
     );
 
     setFilteredLocations(filteredLoc);
     setFilteredItems(filteredItm);
-  };
+  }, [searchQuery, locations, items]);
 
   return (
     <div className="profile-container">
       <LogoutButton setIsSignedIn={setIsSignedIn} />
       <h1>Your Profile</h1>
 
-      {/* Search Bar */}
-      <input
-        type="text"
-        placeholder="Search locations and items..."
-        value={searchQuery}
-        onChange={handleSearch}
-        style={{ marginBottom: '20px', padding: '10px', width: '100%' }}
-      />
+      {/* Search Bar Component */}
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
       {/* Render Filtered Locations */}
       <h2>Created Locations</h2>
@@ -77,7 +69,7 @@ const Profile = ({ setIsSignedIn }) => {
             <LocationTile key={location.id} location={location} />
           ))
         ) : (
-          <li>No locations found.</li>
+          <li>No matching locations found.</li>
         )}
       </ul>
 
@@ -91,7 +83,7 @@ const Profile = ({ setIsSignedIn }) => {
                 <ItemTile key={item.id} item={item} />
               ))
             ) : (
-              <li>No items found for this location.</li>
+              <li>No matching items found for this location.</li>
             )}
           </ul>
         </>
@@ -109,4 +101,5 @@ const Profile = ({ setIsSignedIn }) => {
 };
 
 export default Profile;
+
 
