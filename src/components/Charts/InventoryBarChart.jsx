@@ -1,16 +1,26 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+
+// Register the components explicitly
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const InventoryBarChart = ({ items }) => {
-    // Process items to calculate total quantities by item type or other criteria
     const itemQuantities = items.reduce((acc, item) => {
-        acc[item.name] = (acc[item.name] || 0) + item.quantity;  // Sum quantities by item name
+        acc[item.name] = (acc[item.name] || 0) + item.quantity;
         return acc;
     }, {});
 
-    // Prepare data for Chart.js
-    const labels = Object.keys(itemQuantities);  // Item names
-    const quantities = Object.values(itemQuantities);  // Quantities of each item
+    const labels = Object.keys(itemQuantities);
+    const quantities = Object.values(itemQuantities);
 
     const chartData = {
         labels: labels,
@@ -28,13 +38,8 @@ const InventoryBarChart = ({ items }) => {
     const options = {
         responsive: true,
         plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Item Quantities Overview',
-            },
+            legend: { position: 'top' },
+            title: { display: true, text: 'Item Quantities Overview' },
         },
     };
 
@@ -42,4 +47,5 @@ const InventoryBarChart = ({ items }) => {
 };
 
 export default InventoryBarChart;
+
 
