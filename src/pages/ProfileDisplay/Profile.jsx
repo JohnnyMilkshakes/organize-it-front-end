@@ -1,49 +1,112 @@
 import { useState, useEffect } from "react";
-import "./Profile.css";
 import { getLocations } from "../../services/locations";
-import LocationForm from "../../components/LocationForm/LocationForm";
+import { getItems } from "../../services/items";
 import LocationTile from "../../components/LocationTile/LocationTile";
+import ItemTile from "../../components/ItemTile/ItemTile";
 import LogoutButton from "../../components/NavButtons/LogoutButton";
+import { useParams } from "react-router-dom";  // Assuming you're getting locationId from the URL
 
 const Profile = ({ setIsSignedIn }) => {
+  const { locationId } = useParams();  // Get locationId from the URL (if applicable)
   const [locations, setLocations] = useState([]);
-  const [showForm, setShowForm] = useState(false); // State to show/hide the form
+  const [items, setItems] = useState([]);
+  const [filteredLocations, setFilteredLocations] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
-    const loadLocations = async () => {
-      const userLocations = await getLocations();
-      setLocations(userLocations);
+    const loadData = async () => {
+      try {
+        const userLocations = await getLocations();
+        setLocations(userLocations);
+        setFilteredLocations(userLocations);
+
+        // Only fetch items if locationId is defined
+        if (locationId) {
+          const userItems = await getItems(locationId);
+          setItems(userItems);
+          setFilteredItems(userItems);
+        } else {
+          console.error("Location ID is undefined");
+        }
+      } catch (error) {
+        console.error("Error loading data:", error);
+      }
     };
 
-    loadLocations();
-  }, []);
+    loadData();
+  }, [locationId]);
+
+  // Handle search input change
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    const filteredLoc = locations.filter((location) =>
+      location.name.toLowerCase().includes(query)
+    );
+
+    const filteredItm = items.filter((item) =>
+      item.name.toLowerCase().includes(query)
+    );
+
+    setFilteredLocations(filteredLoc);
+    setFilteredItems(filteredItm);
+  };
 
   return (
     <div className="profile-container">
-      <LogoutButton setIsSignedIn={setIsSignedIn}/>
+      <LogoutButton setIsSignedIn={setIsSignedIn} />
       <h1>Your Profile</h1>
+
+      {/* Search Bar */}
+      <input
+        type="text"
+        placeholder="Search locations and items..."
+        value={searchQuery}
+        onChange={handleSearch}
+        style={{ marginBottom: '20px', padding: '10px', width: '100%' }}
+      />
+
+      {/* Render Filtered Locations */}
       <h2>Created Locations</h2>
       <ul>
-        {locations.length > 0 ? (
-          locations.map((location) => (
-            <LocationTile key={location.id} setLocations={setLocations} location={location}/>
+        {filteredLocations.length > 0 ? (
+          filteredLocations.map((location) => (
+            <LocationTile key={location.id} location={location} />
           ))
         ) : (
           <li>No locations found.</li>
         )}
       </ul>
 
-      {/* Button to show the form */}
+      {/* Render Filtered Items */}
+      {locationId && (
+        <>
+          <h2>Items</h2>
+          <ul>
+            {filteredItems.length > 0 ? (
+              filteredItems.map((item) => (
+                <ItemTile key={item.id} item={item} />
+              ))
+            ) : (
+              <li>No items found for this location.</li>
+            )}
+          </ul>
+        </>
+      )}
+
+      {/* Show/Hide form */}
       <button onClick={() => setShowForm(!showForm)}>
         {showForm ? "Cancel" : "Add New Location"}
       </button>
 
       {/* Conditionally render the form */}
-      {showForm && (
-        <LocationForm setLocations={setLocations} setShowForm={setShowForm} />
-      )}
+      {showForm && <LocationForm setLocations={setLocations} setShowForm={setShowForm} />}
     </div>
   );
 };
 
 export default Profile;
+
