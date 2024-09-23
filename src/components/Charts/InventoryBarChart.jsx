@@ -10,15 +10,17 @@ import {
     Legend,
 } from 'chart.js';
 
-// Register the components explicitly
+// Register required components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const InventoryBarChart = ({ items }) => {
+    // Process items to calculate total quantities by item name
     const itemQuantities = items.reduce((acc, item) => {
         acc[item.name] = (acc[item.name] || 0) + item.quantity;
         return acc;
     }, {});
 
+    // Prepare data for Chart.js
     const labels = Object.keys(itemQuantities);
     const quantities = Object.values(itemQuantities);
 
@@ -28,8 +30,8 @@ const InventoryBarChart = ({ items }) => {
             {
                 label: 'Total Quantity of Items',
                 data: quantities,
-                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(255, 165, 0, 0.6)',  // Orange color for bars
+                borderColor: 'rgba(255, 140, 0, 1)',  // Darker orange for border
                 borderWidth: 1,
             },
         ],
@@ -37,9 +39,19 @@ const InventoryBarChart = ({ items }) => {
 
     const options = {
         responsive: true,
+        scales: {
+            y: {
+                beginAtZero: false,  // Allow the Y-axis to include negative numbers
+            },
+        },
         plugins: {
-            legend: { position: 'top' },
-            title: { display: true, text: 'Item Quantities Overview' },
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Item Quantities Overview',
+            },
         },
     };
 
@@ -47,5 +59,6 @@ const InventoryBarChart = ({ items }) => {
 };
 
 export default InventoryBarChart;
+
 
 
