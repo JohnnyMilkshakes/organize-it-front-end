@@ -118,6 +118,19 @@ label {
   position: relative;
 }
 
+.search-bar {
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.search-bar:focus {
+  border-color: #c13b05;  /* Your theme's color */
+  outline: none;
+}
+
 @media (max-width: 768px) {
   .profile-container {
     width: 90%;

@@ -8,13 +8,24 @@ import "./Item.css";
 
 const Item = ({ setIsSignedIn }) => {
   const { locationId, itemId } = useParams();
+  
+  // Log locationId and itemId to check if they are defined
+  useEffect(() => {
+    console.log("locationId:", locationId);
+    console.log("itemId:", itemId);
+  }, [locationId, itemId]);
+
   const [item, setItem] = useState(null); // State for the selected item
   const [showEditForm, setShowEditForm] = useState(false); // State to show/hide the edit form
 
   useEffect(() => {
     const fetchItem = async () => {
-      const item = await getItem(locationId, itemId);
-      setItem(item);
+      if (locationId && itemId) {  // Ensure both locationId and itemId are defined
+        const item = await getItem(locationId, itemId);
+        setItem(item);
+      } else {
+        console.error("locationId or itemId is undefined");
+      }
     };
     fetchItem();
   }, [locationId, itemId]);
