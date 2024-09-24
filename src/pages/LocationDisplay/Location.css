@@ -1,5 +1,5 @@
 .location-container {
-  height: auto; /* Adjust height to auto to allow for dynamic content like the chart */
+  height: auto;
   min-height: 500px;
   width: 1000px;
   display: flex;
@@ -11,13 +11,11 @@
   backdrop-filter: blur(10px);
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  overflow: hidden; /* Add overflow to handle larger content */
+  overflow: hidden;
 }
 
 .location-container:hover {
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-  transform: scale(1.02);
 }
 
 .nav-buttons {
@@ -32,10 +30,10 @@
 }
 
 .chart-container {
-  width: 100%; /* Allow the chart to take the full width */
-  max-width: 800px; /* Set a maximum width */
-  height: 400px; /* Define height for the chart */
-  margin: 20px auto; /* Add margin to center the chart */
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  margin: 20px auto;
   padding: 20px;
   background: rgba(255, 255, 255, 0.8);
   border-radius: 15px;
