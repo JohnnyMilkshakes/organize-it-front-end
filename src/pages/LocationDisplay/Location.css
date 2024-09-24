@@ -1,5 +1,6 @@
 .location-container {
   height: auto; /* Adjust height to auto to allow for dynamic content like the chart */
+  min-height: 500px;
   width: 1000px;
   display: flex;
   flex-direction: column;
