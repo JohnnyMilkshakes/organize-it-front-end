@@ -2,6 +2,8 @@
 
 ![OrganizeIt](./src/assets/login-page.png)
 ![OrganizeIt](./src/assets/profile-page.png)
+![OrganizeIt](./src/assets/location-page.png)
+![OrganizeIt](./src/assets/item-page.png)
 
 ## OrganizeIt
 
@@ -18,6 +20,7 @@
 
 ## Technologies Used
 - Django
+- JavaScript
 - CSS
 - React
 - PostgreSQL
@@ -29,6 +32,5 @@
 
 - Add image field
 
-- Search for item
 
 
