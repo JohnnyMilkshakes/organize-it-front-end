@@ -1,5 +1,5 @@
 .location-container {
-  height: 650px;
+  height: auto; /* Adjust height to auto to allow for dynamic content like the chart */
   width: 1000px;
   display: flex;
   flex-direction: column;
@@ -11,6 +11,7 @@
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
+  overflow: hidden; /* Add overflow to handle larger content */
 }
 
 .location-container:hover {
@@ -27,6 +28,17 @@
   gap: 10px;
   font-size: 1.5rem;
   cursor: pointer;
+}
+
+.chart-container {
+  width: 100%; /* Allow the chart to take the full width */
+  max-width: 800px; /* Set a maximum width */
+  height: 400px; /* Define height for the chart */
+  margin: 20px auto; /* Add margin to center the chart */
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .location-container li {
@@ -170,6 +182,11 @@ li a {
     width: 100%;
     height: auto;
   }
+
+  .chart-container {
+    max-width: 100%; /* Make the chart responsive on smaller screens */
+    height: 300px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -187,5 +204,9 @@ li a {
 
   button {
     font-size: 0.9rem;
+  }
+
+  .chart-container {
+    height: 250px; /* Reduce chart height for small screens */
   }
 }

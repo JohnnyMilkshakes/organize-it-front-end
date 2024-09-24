@@ -6,6 +6,7 @@ import ItemForm from "../../components/ItemForm/ItemForm";
 import ItemTile from "../../components/ItemTile/ItemTile";
 import ProfileButton from "../../components/NavButtons/ProfileButton";
 import LogoutButton from "../../components/NavButtons/LogoutButton";
+import InventoryBarChart from "../../components/Charts/InventoryBarChart";  // Import the chart component
 import "./Location.css";
 
 const Location = ({ setIsSignedIn }) => {
@@ -32,7 +33,7 @@ const Location = ({ setIsSignedIn }) => {
         const data = await getItems(locationId);
         setItems(data);
       } catch (err) {
-        console.log("Failed to load locations", err);
+        console.log("Failed to load items", err);
       }
     };
     fetchItems();
@@ -48,6 +49,14 @@ const Location = ({ setIsSignedIn }) => {
           </div>
           <h1>Location: {site.name}</h1>
           <p>{site.address}</p>
+
+          {/* Add the chart here */}
+          {items.length > 0 && (
+            <div>
+              <h2>Inventory Overview</h2>
+              <InventoryBarChart items={items} />  {/* Pass items to the chart */}
+            </div>
+          )}
 
           <div>
             {items.length > 0 && (
