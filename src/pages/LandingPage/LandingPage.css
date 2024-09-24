@@ -1,8 +1,8 @@
 .home-container {
   display: flex;
-  min-height: 100vh; /* Changed from height to min-height */
+  min-height: 100vh;
   width: 100vw;
-  overflow-y: auto; /* Ensure scrollability */
+  overflow-y: auto; 
 }
 
 .login-section {
@@ -10,15 +10,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100%; /* Changed from height to min-height */
+  min-height: 100%;
   background-color: #f8f9fa;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow-y: auto; /* Add scrolling for dynamic content */
+  overflow-y: auto;
 }
 
 .welcome-section {
   flex: 1;
-  min-height: 100%; /* Changed from height to min-height */
+  min-height: 100%;
   background-image: url(../assets/LandingPage.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -48,12 +48,13 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 100%;
   padding: 20px;
   background-color: #ffffff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   margin: 0;
-  min-height: auto; /* Allow the form to expand */
+  min-height: auto;
 }
 
 .login-form h2 {
@@ -103,7 +104,7 @@
 
 .btn {
     padding: 10px 20px;
-    background-color: #d14407; /* Customize your color */
+    background-color: #d14407;
     color: white;
     text-decoration: none;
     border: none;
@@ -114,7 +115,7 @@
 }
 
 .btn:hover {
-    background-color: #ff6e0d; /* Slightly darker shade for hover */
+    background-color: #ff6e0d;
 }
 
 .info-box {
@@ -127,19 +128,17 @@
 
 }
 
-
-/* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
   .home-container {
     flex-direction: column;
-    min-height: auto; /* Ensure the container adjusts */
+    min-height: auto;
   }
 
   .login-section,
   .welcome-section {
     flex: none;
     width: 100%;
-    min-height: auto; /* Allow sections to grow with content */
+    min-height: auto; 
   }
 
   .login-form {
