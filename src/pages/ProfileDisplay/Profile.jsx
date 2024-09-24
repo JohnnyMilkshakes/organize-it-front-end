@@ -96,7 +96,7 @@ const Profile = ({ setIsSignedIn }) => {
             />
           ))
         ) : (
-          <li>No matching locations found.</li>
+          <li style={{ color: '#FF7043' }}>No matching locations found, please look below in the items.</li>
         )}
       </ul>
 
@@ -106,16 +106,29 @@ const Profile = ({ setIsSignedIn }) => {
           <h2>Items</h2>
           <ul>
             {filteredItems.length > 0 ? (
-              filteredItems.map((item) => (
-                // Link to the item's detail page
-                <li key={item.id}>
-                  <Link to={`/locations/${item.location_id}/items/${item.id}`}>
-                    {item.name}
-                  </Link>
-                </li>
-              ))
+              filteredItems.map((item) => {
+                // Find the location for the current item based on location_id
+                const itemLocation = locations.find(
+                  (location) => location.id === item.location_id
+                );
+
+                return (
+                  <li key={item.id}>
+                    {/* Link to the item's detail page */}
+                    <Link to={`/locations/${item.location_id}/items/${item.id}`}>
+                      {item.name}
+                    </Link>
+                    {/* Display the location name next to the item with inline style */}
+                    {itemLocation && (
+                      <span style={{ color: '#FF7043' }}>
+                        {" "} (Location: {itemLocation.name})
+                      </span>
+                    )}
+                  </li>
+                );
+              })
             ) : (
-              <li>No matching items found.</li>
+              <li style={{ color: '#FF7043' }}>No matching items found.</li>
             )}
           </ul>
         </>
